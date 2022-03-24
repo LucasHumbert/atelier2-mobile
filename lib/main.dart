@@ -1,3 +1,5 @@
+import 'package:atelier/pages/create_event.dart';
+import 'package:atelier/pages/event.dart';
 import 'package:atelier/pages/home.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +15,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      initialRoute: MyHomePage.routeName,
+      routes: {
+        MyHomePage.routeName : (context) => const MyHomePage(),
+        EventPage.routeName: (context) => const EventPage(),
+        CreateEventPage.routeName: (context) => const CreateEventPage(),
+      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
