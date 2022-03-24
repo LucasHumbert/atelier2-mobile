@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/intl.dart';
 
 class CreateEventPage extends StatefulWidget {
   const CreateEventPage({Key? key}) : super(key: key);
@@ -12,28 +12,8 @@ class CreateEventPage extends StatefulWidget {
 
 class _CreateEventPage extends State<CreateEventPage> {
 
-  final _dateController = TextEditingController();
-
   DateTime selectedDate = DateTime.now();
-
-
-  Future<Null> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        initialDatePickerMode: DatePickerMode.day,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2101));
-    if (picked != null) {
-      setState(() {
-        selectedDate = picked;
-        //_dateController.text =;
-      });
-    }
-  }
-
-
-
+  TimeOfDay selectedTime = TimeOfDay.now();
 
 
   @override
@@ -90,19 +70,57 @@ class _CreateEventPage extends State<CreateEventPage> {
                           const SizedBox(
                             height: 30.0,
                           ),
-                          ElevatedButton(
-                              onPressed: () =>
-                              {
-
-                              },
-                              child: const Text("SELECT DATE")),
+                          RichText(
+                              text: const TextSpan(
+                                  text: "DISPONIBILITE DE L'EVENEMENT",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 10.0,
+                                      shadows: <Shadow>[
+                                        Shadow(
+                                          offset: Offset(2.0, 2.0),
+                                          blurRadius: 10.0,
+                                          color: Color.fromARGB(80, 0, 0, 0),
+                                        )
+                                      ]))),
                           const SizedBox(
-                            height: 10.0,
+                            height: 30.0,
+                          ),
+                          Center(
+                            child:  Text(DateFormat('yyyy-mm-dd').format(selectedDate)),
                           ),
                           ElevatedButton(
                               onPressed: () =>
-                              {Navigator.pushNamed(context, '/event')},
-                              child: const Text("CREER L'EVENEMENT")),
+                              {
+                                _selectDate(context)
+                              },
+                              child: const Text("SELECTIONNER LA DATE")),
+                          Center(
+                            child: Text(selectedTime.hour.toString() + ':' + selectedTime.minute.toString()),
+                          ),
+                          ElevatedButton(
+                              onPressed: () =>
+                              {
+                                _selectTime(context)
+                              },
+                              child: const Text("SELECTIONNER L'HEURE")),
+                          const SizedBox(
+                            height: 50.0,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                var temps = DateTime(selectedDate.year, selectedDate.month, selectedDate.day, selectedTime.hour,selectedTime.minute);
+                                print(temps.toString());
+                                Navigator.pushNamed(context, '/event');
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.lightGreen,
+                                textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )
+                              ),
+                              child: const Text("CREER L'EVENEMENT")
+                              ),
                           const SizedBox(
                             height: 10.0,
                           ),
@@ -114,4 +132,38 @@ class _CreateEventPage extends State<CreateEventPage> {
         )
     );
   }
+
+  _selectDate(BuildContext context) async {
+    final DateTime? selected = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2025),
+    );
+    if (selected != null && selected != selectedDate) {
+      setState(() {
+        selectedDate = selected;
+      });
+    }
+  }
+
+  _selectTime(BuildContext context) async {
+    final TimeOfDay? timeOfDay = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+      initialEntryMode: TimePickerEntryMode.input,
+      confirmText: "CONFIRMER",
+      cancelText: "ANNULER",
+      helpText: "MIS EN PLACE DE L'HEURE",
+
+    );
+    if(timeOfDay != null && timeOfDay != selectedTime)
+    {
+      setState(() {
+        selectedTime = timeOfDay;
+
+      });
+    }
+  }
+
 }

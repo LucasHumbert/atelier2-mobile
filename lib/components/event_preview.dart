@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class EventPreview extends StatefulWidget {
+  const EventPreview({Key? key}) : super(key: key);
 
   static String routeName = '/';
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<EventPreview> createState() => _EventPreviewState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _EventPreviewState extends State<EventPreview> {
   @override
   Widget build(BuildContext context) {
-    return Text('Test');
+    return GestureDetector(
+      onTap: () {
+        print('test');
+      },
+      child: Container(
+          child: Column(
+            children: const [
+              Text("Titre de l'event"),
+            ],
+          )
+      ),
+    );
   }
 }

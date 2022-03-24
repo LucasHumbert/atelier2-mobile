@@ -1,3 +1,4 @@
+import 'package:atelier/components/event_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -38,12 +39,16 @@ class _EventPage extends State<EventPage> {
             }, child: const Text('CREER UN EVENEMENT')
         ),
         ElevatedButton(onPressed: () => {}, child: Text('MON PROFIL')),
-        ListView.builder(
+        const SizedBox(
+          height: 20,
+        ),
+        ListView.separated(
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            return Text('test');
+            return EventPreview();
           },
           itemCount: 15,
+          separatorBuilder: (BuildContext context, int index) { return const Divider(); },
         )
       ],
     )));
