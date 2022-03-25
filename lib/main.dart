@@ -1,6 +1,7 @@
 import 'package:atelier/pages/create_event.dart';
 import 'package:atelier/pages/event.dart';
 import 'package:atelier/pages/home.dart';
+import 'package:atelier/pages/profil.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         MyHomePage.routeName : (context) => const MyHomePage(),
         EventPage.routeName: (context) => const EventPage(),
         CreateEventPage.routeName: (context) => const CreateEventPage(),
+        Profil.routeName: (context) => const Profil(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

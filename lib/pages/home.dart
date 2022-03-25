@@ -1,5 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:atelier/data/dart_var.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -11,9 +16,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final mailController = TextEditingController();
   final passwordController = TextEditingController();
+  late String accessToken;
 
   @override
   void dispose() {
@@ -21,7 +26,6 @@ class _MyHomePageState extends State<MyHomePage> {
     mailController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -97,10 +101,21 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 30.0,
                       ),
                       ElevatedButton(
-                          onPressed: () =>
-                              {
-                                Navigator.pushNamed(context, '/event')
-                              },
+                          onPressed: () async {
+                            // Dio dio = Dio();
+                            // String username = mailController.text;
+                            // String password = passwordController.text;
+                            // String basicAuth = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
+                            // Response r = await dio.get(data.apiauth, options:Options(
+                            //  headers: <String, String>{'authorization': basicAuth}
+                            // ));
+                            // if(r.statusCode == 200) {
+                            //   SharedPreferences.setMockInitialValues({});
+                            //   final prefs = await SharedPreferences.getInstance();
+                            //   prefs.setString('accessToken', r.data['accessToken']);
+                            Navigator.pushNamed(context, '/event');
+                            //}
+                          },
                           child: const Text('SE CONNECTER')),
                       const SizedBox(
                         height: 10.0,

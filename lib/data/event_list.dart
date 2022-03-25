@@ -11,6 +11,7 @@ class EventCollection extends ChangeNotifier {
   late Response response;
 
 
+
   BaseOptions options = BaseOptions(
     baseUrl: "https://jsonplaceholder.typicode.com",
     connectTimeout: 5000,
@@ -28,9 +29,8 @@ class EventCollection extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<Event>> getAllTask() async {
-    await fetchTasks();
-    return events;
+  void getAllTask() async {
+    return;
   }
 
   Future<void> fetchTasks() async {
