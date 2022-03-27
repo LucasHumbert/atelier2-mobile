@@ -5,8 +5,8 @@ class Event {
   String address = '';
   double lat = 0.00;
   double lon = 0.00;
-  DateTime date = DateTime.now();
-  bool public = false;
+  String date = '';
+  String public = '';
 
   Event(this.id, this.title, this.description, this.date, this.public);
 

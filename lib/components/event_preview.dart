@@ -1,8 +1,11 @@
+import 'package:atelier/model/event.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EventPreview extends StatefulWidget {
-   const EventPreview({Key? key}) : super(key: key);
+
+   Event event;
+
+   EventPreview(this.event , {Key? key}) : super(key: key);
 
   @override
   State<EventPreview> createState() => _EventPreviewState();
@@ -17,8 +20,8 @@ class _EventPreviewState extends State<EventPreview> {
       },
       child: Container(
           child: Column(
-            children: const [
-              Text("Titre de l'event"),
+            children:[
+              Text(widget.event.title),
             ],
           )
       ),

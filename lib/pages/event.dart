@@ -1,11 +1,9 @@
 import 'package:atelier/components/event_master.dart';
-import 'package:atelier/components/event_preview.dart';
 import 'package:atelier/data/event_list.dart';
 import 'package:atelier/model/event.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
@@ -28,7 +26,7 @@ class _EventPage extends State<EventPage> {
   void _loadAccessToken() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      accessToken = (prefs.getString('accessToken') ?? "Pas de clé");
+      accessToken = (prefs.getString('accessToken') ?? "");
     });
   }
 
@@ -67,14 +65,17 @@ class _EventPage extends State<EventPage> {
                   ),
                   FutureBuilder<List<Event>>(
                       future: event.getAllTask(),
-                      builder:(BuildContext context, AsyncSnapshot<List<Event>> snapshot){
-                        if(snapshot.hasData){
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<Event>> snapshot) {
+                        if (snapshot.hasData) {
+                          print(snapshot);
                           return EventMaster(snapshot.data);
-                        }else{
-                          return Container();
+                        } else {
+                          return Container(
+                            child: Text('Je suis un container'),
+                          );
                         }
-                      }
-                  ),
+                      }),
                 ],
               ),
             ))));
