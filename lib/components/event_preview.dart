@@ -22,6 +22,8 @@ class _EventPreviewState extends State<EventPreview> {
           child: Column(
             children:[
               Text(widget.event.title),
+              Text(widget.event.description),
+              Text(widget.event.address),
             ],
           )
       ),
