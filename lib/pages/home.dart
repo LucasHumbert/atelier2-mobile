@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:atelier/data/dart_var.dart';
+import 'package:atelier/data/dart_var.dart' as data;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -102,19 +102,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       ElevatedButton(
                           onPressed: () async {
-                            // Dio dio = Dio();
-                            // String username = mailController.text;
-                            // String password = passwordController.text;
-                            // String basicAuth = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
-                            // Response r = await dio.get(data.apiauth, options:Options(
-                            //  headers: <String, String>{'authorization': basicAuth}
-                            // ));
-                            // if(r.statusCode == 200) {
-                            //   SharedPreferences.setMockInitialValues({});
-                            //   final prefs = await SharedPreferences.getInstance();
-                            //   prefs.setString('accessToken', r.data['accessToken']);
+                            Dio dio = Dio();
+                            String username = mailController.text;
+                            String password = passwordController.text;
+                            String basicAuth = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
+                            Response r = await dio.get(data.apiauth, options:Options(
+                             headers: <String, String>{'authorization': basicAuth}
+                            ));
+                            if(r.statusCode == 200) {
+                              SharedPreferences.setMockInitialValues({});
+                              final prefs = await SharedPreferences.getInstance();
+                              prefs.setString('accessToken', r.data['accessToken']);
                             Navigator.pushNamed(context, '/event');
-                            //}
+                            }
                           },
                           child: const Text('SE CONNECTER')),
                       const SizedBox(

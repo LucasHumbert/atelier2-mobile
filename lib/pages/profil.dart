@@ -16,9 +16,28 @@ class Profil extends StatefulWidget {
 }
 
 class _Profil extends State<Profil> {
-
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(child: Scaffold());
+    return DefaultTabController(length: 3, initialIndex: 1, child: SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Profil'),
+          bottom: const TabBar(
+            tabs: <Widget>[
+              Tab(
+                icon: Icon(Icons.alternate_email_outlined),
+              ),
+              Tab(
+                icon: Icon(Icons.alarm_on_sharp),
+              ),
+              Tab(
+                icon: Icon(Icons.app_registration_rounded),
+              ),
+            ],
+          ),
+        ),
+      ),
+    )
+    );
   }
 }

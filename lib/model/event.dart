@@ -2,6 +2,9 @@ class Event {
   String id = '';
   String title = '';
   String description = '';
+  String address = '';
+  double lat = 0.00;
+  double lon = 0.00;
   DateTime date = DateTime.now();
   bool public = false;
 
@@ -12,6 +15,9 @@ class Event {
         title = json['title'],
         description = json['description'],
         date = json['date'],
+        address = json['address'],
+        lat = json['lat'],
+        lon = json['lon'],
         public = json['date'];
 
   //prepare json data from Dart object to send to API

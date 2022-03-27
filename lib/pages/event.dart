@@ -1,5 +1,9 @@
+import 'package:atelier/components/event_master.dart';
 import 'package:atelier/components/event_preview.dart';
+import 'package:atelier/data/event_list.dart';
+import 'package:atelier/model/event.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,55 +28,55 @@ class _EventPage extends State<EventPage> {
   void _loadAccessToken() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      //accessToken = (prefs.getString('accessToken') ?? "Pas de clé");
+      accessToken = (prefs.getString('accessToken') ?? "Pas de clé");
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            body: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-              child: Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: RichText(
-                text: const TextSpan(
-                    text: 'EVENEMENT PUBLIQUE :',
-                    style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0))),
-          )),
-          const SizedBox(
-            height: 30.0,
-          ),
-          ElevatedButton(
-              onPressed: () => {Navigator.pushNamed(context, '/create_event')},
-              child: const Text('CREER UN EVENEMENT')),
-          ElevatedButton(
-              onPressed: () => {Navigator.pushNamed(context, '/profil')},
-              child: Text('MON PROFIL')),
-          const SizedBox(
-            height: 20,
-          ),
-          ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) {
-              return EventPreview();
-            },
-            itemCount: 10,
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                height: 30,
-              );
-            },
-          )
-        ],
-      ),
-    )));
+    return Consumer<EventCollection>(
+        builder: (context, event, child) => SafeArea(
+                child: Scaffold(
+                    body: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Center(
+                      child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: RichText(
+                        text: const TextSpan(
+                            text: 'EVENEMENT PUBLIQUE :',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0))),
+                  )),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  ElevatedButton(
+                      onPressed: () =>
+                          {Navigator.pushNamed(context, '/create_event')},
+                      child: const Text('CREER UN EVENEMENT')),
+                  ElevatedButton(
+                      onPressed: () =>
+                          {Navigator.pushNamed(context, '/profil')},
+                      child: Text('MON PROFIL')),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  FutureBuilder<List<Event>>(
+                      future: event.getAllTask(),
+                      builder:(BuildContext context, AsyncSnapshot<List<Event>> snapshot){
+                        if(snapshot.hasData){
+                          return EventMaster(snapshot.data);
+                        }else{
+                          return Container();
+                        }
+                      }
+                  ),
+                ],
+              ),
+            ))));
   }
 }

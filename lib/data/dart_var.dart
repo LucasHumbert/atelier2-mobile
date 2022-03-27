@@ -1,2 +1,2 @@
-String apiauth = '';
-String apievent = 'http://a39c-194-214-171-11.ngrok.io/events';
+String apiauth = 'http://51.159.78.9:62563/auth';
+String apievent = 'http://51.159.78.9:62560/events';

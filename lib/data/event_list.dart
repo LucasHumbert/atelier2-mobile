@@ -1,7 +1,7 @@
 import 'package:atelier/model/event.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:atelier/data/dart_var.dart' as data;
 
 class EventCollection extends ChangeNotifier {
 
@@ -13,7 +13,7 @@ class EventCollection extends ChangeNotifier {
 
 
   BaseOptions options = BaseOptions(
-    baseUrl: "https://jsonplaceholder.typicode.com",
+    baseUrl: data.apievent,
     connectTimeout: 5000,
     receiveTimeout: 3000,
   );
@@ -29,12 +29,29 @@ class EventCollection extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getAllTask() async {
-    return;
+  Future<List<Event>> getAllTask() async {
+    fetchTasks();
+    return events;
   }
 
-  Future<void> fetchTasks() async {
+  void fetchTasks() async {
+    var dio = Dio(options);
+    try {
+      Response response = await dio.get('/');
 
+
+      if(response.statusCode == 200) {
+        for(var records in response.data['events']){
+          print(records);
+          // var event = Event.fromJson(records);
+          // events.add(event);
+        }
+      } else {
+        print('error');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   void delete(Event event) async {

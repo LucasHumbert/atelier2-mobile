@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventPreview extends StatefulWidget {
-  const EventPreview({Key? key}) : super(key: key);
-
-  static String routeName = '/';
+   const EventPreview({Key? key}) : super(key: key);
 
   @override
   State<EventPreview> createState() => _EventPreviewState();
