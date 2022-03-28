@@ -15,19 +15,14 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPage extends State<EventPage> {
-  late String accessToken;
 
   @override
   void initState() {
     super.initState();
-    _loadAccessToken();
   }
 
   void _loadAccessToken() async {
     final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      accessToken = (prefs.getString('accessToken') ?? "");
-    });
   }
 
   @override

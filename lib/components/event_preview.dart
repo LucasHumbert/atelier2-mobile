@@ -1,15 +1,12 @@
 import 'package:atelier/model/event.dart';
+import 'package:atelier/pages/one_event.dart';
 import 'package:flutter/material.dart';
 
 class EventPreview extends StatefulWidget {
 
-  Function changeView;
-
-  int index;
-
    Event event;
 
-   EventPreview(this.event, this.changeView, this.index, {Key? key}) : super(key: key);
+   EventPreview(this.event, {Key? key}) : super(key: key);
 
   @override
   State<EventPreview> createState() => _EventPreviewState();
@@ -20,7 +17,7 @@ class _EventPreviewState extends State<EventPreview> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.changeView(widget.index);
+        Navigator.pushNamed(context, OneEvent.routeName, arguments: widget.event);
       },
       child: Container(
           child: Column(

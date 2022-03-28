@@ -5,23 +5,26 @@ import 'package:atelier/data/dart_var.dart' as data;
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-class EventFull extends StatefulWidget {
+class OneEvent extends StatefulWidget {
 
-  Event event;
+  static String routeName = '/oneevent';
 
-  EventFull(this.event , {Key? key}) : super(key: key);
+  OneEvent({Key? key}) : super(key: key);
 
   @override
-  State<EventFull> createState() => _EventFull();
+  State<OneEvent> createState() => _OneEvent();
 }
 
-class _EventFull extends State<EventFull> {
+class _OneEvent extends State<OneEvent> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: FlutterMap(
+
+    final args = ModalRoute.of(context)!.settings.arguments as Event;
+
+    return FlutterMap(
       options: MapOptions(
-        center: LatLng(51.5, -0.09),
+        center: LatLng(args.lat, args.lon),
         zoom: 13.0,
       ),
       layers: [
@@ -37,16 +40,15 @@ class _EventFull extends State<EventFull> {
             Marker(
               width: 80.0,
               height: 80.0,
-              point: LatLng(51.5, -0.09),
+              point: LatLng(args.lat, args.lon),
               builder: (ctx) =>
                   Container(
-                    child: FlutterLogo(),
+                    child: const Icon(Icons.location_on),
                   ),
             ),
           ],
         ),
       ],
-    )
     );
   }
 }
