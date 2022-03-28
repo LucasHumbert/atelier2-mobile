@@ -1,10 +1,5 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:atelier/data/dart_var.dart';
+
 
 class Profil extends StatefulWidget {
   const Profil({Key? key}) : super(key: key);
@@ -18,7 +13,7 @@ class Profil extends StatefulWidget {
 class _Profil extends State<Profil> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(length: 3, initialIndex: 1, child: SafeArea(
+    return DefaultTabController(length: 3, initialIndex: 0, child: SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Profil'),
@@ -36,8 +31,18 @@ class _Profil extends State<Profil> {
             ],
           ),
         ),
+        body: const TabBarView(
+          children: [
+            Icon(Icons.directions_car),
+            Icon(Icons.directions_transit),
+            Icon(Icons.directions_bike),
+          ],
+        ),
       ),
     )
     );
   }
 }
+
+
+
