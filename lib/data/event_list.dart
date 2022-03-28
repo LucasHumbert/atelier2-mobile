@@ -18,9 +18,8 @@ class EventCollection extends ChangeNotifier {
     receiveTimeout: 3000,
   );
 
-  void create(Event event) async {
-
-
+  void add(Event event) async {
+    events.add(event);
     notifyListeners();
   }
 
@@ -35,9 +34,9 @@ class EventCollection extends ChangeNotifier {
   }
 
   Future<void> fetchTasks() async {
-    events = [];
     var dio = Dio(options);
     try {
+      events = [];
       Response response = await dio.get('/');
 
 

@@ -8,7 +8,7 @@ class Event {
   String date = '';
   String public = '';
 
-  Event(this.id, this.title, this.description, this.date, this.public);
+  Event(this.id, this.title, this.description, this.address, this.lat, this.lon, this.date, this.public);
 
   Event.fromJson(Map<String, dynamic> json)
       : id = json['id'],

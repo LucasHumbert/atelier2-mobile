@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 
 class EventPreview extends StatefulWidget {
 
+  Function changeView;
+
+  int index;
+
    Event event;
 
-   EventPreview(this.event , {Key? key}) : super(key: key);
+   EventPreview(this.event, this.changeView, this.index, {Key? key}) : super(key: key);
 
   @override
   State<EventPreview> createState() => _EventPreviewState();
@@ -16,7 +20,7 @@ class _EventPreviewState extends State<EventPreview> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('test');
+        widget.changeView(widget.index);
       },
       child: Container(
           child: Column(
@@ -24,6 +28,7 @@ class _EventPreviewState extends State<EventPreview> {
               Text(widget.event.title),
               Text(widget.event.description),
               Text(widget.event.address),
+              Text(widget.event.date)
             ],
           )
       ),

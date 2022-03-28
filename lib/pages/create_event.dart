@@ -1,10 +1,14 @@
 import 'dart:convert';
 
+import 'package:atelier/data/event_list.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:atelier/data/dart_var.dart' as data;
+
+import '../model/event.dart';
 
 enum EventType { public, private }
 
@@ -201,6 +205,11 @@ class _CreateEventPage extends State<CreateEventPage> {
                                         'public' : isPublic,
                                       }
                                   );
+                                  if (r.statusCode == 200) {
+                                    Event e = Event(r.data['event']['id'], _title.text, _desc.text, adresse, lat, lng,temps.toString(), isPublic ? "1" : "0");
+                                    Provider.of<EventCollection>(context, listen:false).add(e);
+                                    Navigator.pushNamed(context, '/events');
+                                  }
                                 },
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.lightGreen,
