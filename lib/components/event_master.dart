@@ -1,4 +1,3 @@
-import 'package:atelier/components/event_full.dart';
 import 'package:atelier/model/event.dart';
 import 'package:flutter/material.dart';
 
