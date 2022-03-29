@@ -63,7 +63,6 @@ class _EventPage extends State<EventPage> {
                       builder: (BuildContext context,
                           AsyncSnapshot<List<Event>> snapshot) {
                         if (snapshot.hasData) {
-                          print(snapshot);
                           return EventMaster(snapshot.data);
                         } else {
                           return Container(

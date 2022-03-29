@@ -113,6 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               SharedPreferences.setMockInitialValues({});
                               final prefs = await SharedPreferences.getInstance();
                               prefs.setString('accessToken', r.data['accessToken']);
+                              prefs.setString('idUser', r.data['user_id']);
                             Navigator.pushNamed(context, '/event');
                             }
                           },

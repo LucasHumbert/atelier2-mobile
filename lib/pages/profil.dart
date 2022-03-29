@@ -1,3 +1,6 @@
+import 'package:atelier/components/user_info.dart';
+import 'package:atelier/components/user_joinevent.dart';
+import 'package:atelier/components/user_ownevent.dart';
 import 'package:flutter/material.dart';
 
 
@@ -31,11 +34,11 @@ class _Profil extends State<Profil> {
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            Icon(Icons.directions_car),
-            Icon(Icons.directions_transit),
-            Icon(Icons.directions_bike),
+            UserInfo(),
+            UserJoinEvent(),
+            UserOwnEvent(),
           ],
         ),
       ),
