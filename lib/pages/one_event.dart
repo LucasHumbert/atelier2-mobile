@@ -27,6 +27,7 @@ class _OneEvent extends State<OneEvent> {
   /**
   Fetching event info
    */
+  bool refresh = false;
 
   Future<List<Commentaire>> getComments(args) async {
     Dio dio = Dio();
@@ -134,6 +135,18 @@ class _OneEvent extends State<OneEvent> {
                           'authorization': bearerAuth
                         }),
                         data: {'choice': 1});
+
+                    await dio.post(data.apievent + '/' + args.id + '/message', data: {
+                      'content' : 'Je viens !',
+                    }, options: Options(
+                        headers: <String, String>{
+                          'authorization': bearerAuth
+                        }
+                    ));
+
+                    setState(() {
+                      refresh = !refresh;
+                    });
                   },
                   child: Text('Je participe')),
               ElevatedButton(
@@ -149,6 +162,16 @@ class _OneEvent extends State<OneEvent> {
                           'authorization': bearerAuth
                         }),
                         data: {'choice': 0});
+                    await dio.post(data.apievent + '/' + args.id + '/message', data: {
+                      'content' : 'Je ne viens pas !',
+                    }, options: Options(
+                        headers: <String, String>{
+                          'authorization': bearerAuth
+                        }
+                    ));
+                    setState(() {
+                      refresh = !refresh;
+                    });
                   },
                   child: Text('Je ne participe pas'))
             ],
@@ -210,6 +233,12 @@ class _OneEvent extends State<OneEvent> {
                   'authorization': bearerAuth
                 }
                 ));
+
+                setState(() {
+                  refresh = !refresh;
+                });
+
+                _message.text = '';
               },
               child: Text('Envoyer le message'))
         ],
