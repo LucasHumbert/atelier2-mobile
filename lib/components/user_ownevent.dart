@@ -27,7 +27,7 @@ class _UserOwnEvent extends State<UserOwnEvent> {
     String bearerAuth = 'Bearer ' + token!;
 
     Dio dio = new Dio();
-    Response r = await dio.get(data.apievent + '?filter[]=userConnected', options: Options(
+    Response r = await dio.get(data.apievent + '?creator_id=' + id!, options: Options(
         headers: <String, String>{
           'authorization': bearerAuth
         }
