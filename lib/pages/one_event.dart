@@ -24,6 +24,8 @@ class OneEvent extends StatefulWidget {
 class _OneEvent extends State<OneEvent> {
   late TextEditingController _message = TextEditingController();
 
+  int choice = 3;
+
   /**
   Fetching event info
    */
@@ -56,12 +58,17 @@ class _OneEvent extends State<OneEvent> {
    */
   Future<List<User>> getUser(args) async {
     Dio dio = Dio();
-    Response r =
-    await dio.get(data.apievent + "/" + args.id + '?embed[]=messages&embed[]=users');
+    Response r = await dio.get(data.apievent + "/" + args.id + '?embed[]=messages&embed[]=users');
     List<User> users = [];
+    final prefs = await SharedPreferences.getInstance();
 
     if (r.statusCode == 200) {
       for (var u in r.data['users']) {
+        if(u['user_id'] == prefs.getString('idUser')) {
+          setState(() {
+            choice = u['choice'];
+          });
+        }
         User user = User(userId: u['user_id'], firstname: u['firstname'], lastname: u['lastname'], choice: u['choice']);
         users.insert(0, user);
       }
@@ -70,6 +77,12 @@ class _OneEvent extends State<OneEvent> {
     return users;
   }
 
+
+  getWidget() {
+    if(choice == 1) {
+
+    }
+  }
 
 
 
@@ -126,15 +139,25 @@ class _OneEvent extends State<OneEvent> {
                   onPressed: () async {
                     final prefs = await SharedPreferences.getInstance();
                     String? token = prefs.getString('accessToken');
+                    String? id = prefs.getString('idUser');
                     String bearerAuth = 'Bearer ' + token!;
 
                     Dio dio = Dio();
-                    await dio.post(
-                        data.apievent + '/' + args.id + '/users/',
-                        options: Options(headers: <String, String>{
-                          'authorization': bearerAuth
-                        }),
-                        data: {'choice': 1});
+                    if(choice != 3) {
+                      await dio.put(
+                          data.apievent + '/' + args.id + '/users/' + id!,
+                          options: Options(headers: <String, String>{
+                            'authorization': bearerAuth
+                          }),
+                          data: {'choice': 1});
+                    } else {
+                      await dio.post(
+                          data.apievent + '/' + args.id + '/users/',
+                          options: Options(headers: <String, String>{
+                            'authorization': bearerAuth
+                          }),
+                          data: {'choice': 1});
+                    }
 
                     await dio.post(data.apievent + '/' + args.id + '/message', data: {
                       'content' : 'Je viens !',
@@ -153,15 +176,25 @@ class _OneEvent extends State<OneEvent> {
                   onPressed: () async {
                     final prefs = await SharedPreferences.getInstance();
                     String? token = prefs.getString('accessToken');
+                    String? id = prefs.getString('idUser');
                     String bearerAuth = 'Bearer ' + token!;
 
                     Dio dio = Dio();
-                    await dio.post(
-                        data.apievent + '/' + args.id + '/users/',
-                        options: Options(headers: <String, String>{
-                          'authorization': bearerAuth
-                        }),
-                        data: {'choice': 0});
+                    if(choice != 3) {
+                      await dio.put(
+                          data.apievent + '/' + args.id + '/users/' + id!,
+                          options: Options(headers: <String, String>{
+                            'authorization': bearerAuth
+                          }),
+                          data: {'choice': 0});
+                    } else {
+                      await dio.post(
+                          data.apievent + '/' + args.id + '/users/',
+                          options: Options(headers: <String, String>{
+                            'authorization': bearerAuth
+                          }),
+                          data: {'choice': 0});
+                    }
                     await dio.post(data.apievent + '/' + args.id + '/message', data: {
                       'content' : 'Je ne viens pas !',
                     }, options: Options(
