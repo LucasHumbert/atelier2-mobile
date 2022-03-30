@@ -48,6 +48,7 @@ class _UserOwnEvent extends State<UserOwnEvent> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Text('Mes évènements'),
         Padding(
           padding: EdgeInsets.all(20),
           child: FutureBuilder(

@@ -48,6 +48,7 @@ class _UserJoinEvent extends State<UserJoinEvent> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Text('Evènement auquel je participe / suis invité !'),
         Padding(
           padding: EdgeInsets.all(20),
           child: FutureBuilder(
