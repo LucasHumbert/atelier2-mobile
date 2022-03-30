@@ -10,6 +10,7 @@ Elle permet aussi de pouvoir voir ses événements privés, pouvoir poster des m
 L'application a été réalisée avec Flutter dans le cadre de l'atelier 2.
 Une preview du projet est disponible sur youtube à l'adresse suivante :
 https://www.youtube.com/watch?v=8yKAfaB4ljE
+
 ---
 
 ## Projet Réunionou
