@@ -1,16 +1,37 @@
-# atelier
+# Atelier Réunionou - Mobile
+[![forthebadge](https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com)
+- Lambert Calvin
+- Budzik Valentin
+- Houques Baptiste
+- Humbert Lucas
 
-Flutter project for Reunionou
+L'application mobile permet aux utilisateurs de pouvoir voir les événements publics pour pouvoir y participer.
+Elle permet aussi de pouvoir voir ses événements privés, pouvoir poster des messages. Et visualiser sur la map l'endroit précis des réunions.
+L'application a été réalisée avec Flutter dans le cadre de l'atelier 2.
+Une preview du projet est disponible sur youtube à l'adresse suivante :
+https://www.youtube.com/watch?v=8yKAfaB4ljE
+---
 
-## Getting Started
+## Projet Réunionou
 
-This project is a starting point for a Flutter application.
+- [Application frontend](https://github.com/LucasHumbert/atelier2-front)
+- [Application backend](https://github.com/LucasHumbert/atelier2-back)
+- [Application backoffice](https://github.com/LucasHumbert/atelier2-backoffice)
+- [Application mobile](https://github.com/LucasHumbert/atelier2-mobile)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+---
+### Mise en place de flutter
+- [Installation de flutter](https://docs.flutter.dev/get-started/install)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Récupération du projet
+```
+git clone git@github.com:LucasHumbert/atelier2-mobile.git
+```
+```
+cd atelier2-mobile
+```
+### Lancement de l'application flutter
+```
+flutter run
+```
